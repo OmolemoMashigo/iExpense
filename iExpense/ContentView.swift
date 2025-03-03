@@ -8,8 +8,17 @@
 import SwiftUI
 
 struct SecondView: View{
+    @Environment(\.dismiss) var dismiss
+    let name: String
     var body: some View{
-        Text("Second View")
+        VStack{
+            Text("Hello \(name)")
+            
+            Button("Dismiss"){
+                dismiss()
+            }
+        }
+        
     }
 }
 
@@ -22,7 +31,7 @@ struct ContentView: View {
             showingSheet.toggle()
         }
         .sheet(isPresented: $showingSheet){
-            SecondView()
+            SecondView(name: "Omo")
         }
         .padding()
     }
