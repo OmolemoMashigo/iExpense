@@ -8,11 +8,36 @@
 import SwiftUI
 
 struct AddView: View {
+    
+    @State private var name = ""
+    @State private var type = "Personal"
+    @State private var amount = 0.0
+    
+    var expense: Expense
+    
+    let types = ["Personal", "Business"]
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        NavigationStack{
+            Form{
+                TextField("Name:", text: $name)
+                
+                Picker("Type", selection: $type){
+                    ForEach(types, id: \.self){
+                        Text($0)
+                    }
+                }
+                
+                TextField("amount", value: $amount, format: .currency(code: "USD"))
+                    .keyboardType(.decimalPad)
+            }
+            .navigationTitle("Add new expense")
+        }
+        
     }
 }
 
 #Preview {
-    AddView()
+    AddView(expense: Expense())
 }
